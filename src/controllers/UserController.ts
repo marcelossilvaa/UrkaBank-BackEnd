@@ -2,6 +2,15 @@ import { Request, Response, response } from 'express'
 import { UserService } from '../services/UserService'
 
 export class UserController {
+
+  userService: UserService
+
+  constructor(
+    userService = new UserService()
+  ){
+    this.userService = userService
+  }
+
   createUser = (request: Request, reponse: Response) => {
     const userService = new UserService()
     const user = request.body
