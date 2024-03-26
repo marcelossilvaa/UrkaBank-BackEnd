@@ -26,6 +26,23 @@ export class UserController {
     return reponse.status(201).json({ message: 'Usuário criado' })
   }
 
+
+  deleteUser = (request: Request, response: Response) => {
+    const userEmailToDelete = request.body.email;
+
+    if (!userEmailToDelete) {
+      return response.status(400).json({ message: 'Bad request! Email required' });
+    }
+
+    const isDeleted = this.userService.deleteUserByEmail(userEmailToDelete);
+    if (isDeleted) {
+      return response.status(200).json({ message: 'Usuário deletado' });
+    } else {
+      return response.status(404).json({ message: 'Usuário não encontrado' });
+    }
+  };
+  
+
   getAllUsers = (request: Request, response: Response) => {
     const userService = new UserService()
 

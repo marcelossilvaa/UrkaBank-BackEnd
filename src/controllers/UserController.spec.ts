@@ -7,7 +7,9 @@ import { Request } from  'express'
 
 describe('UserController', () => {
   const mockUserService: Partial<UserService> = {
-    createUser: jest.fn()
+    createUser: jest.fn(),
+    deleteUserByEmail: jest.fn(),
+    getAllUsers: jest.fn()
   }
   const userController = new UserController(mockUserService as UserService);
 
@@ -60,6 +62,5 @@ describe('UserController', () => {
     expect(mockResponse.state.status).toBe(200)
     expect(Array.isArray(mockResponse.state.json)).toBe(true)
   })
-
 
 })
