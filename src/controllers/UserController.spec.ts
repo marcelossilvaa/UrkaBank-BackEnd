@@ -26,28 +26,15 @@ describe('UserController', () => {
     expect(mockResponse.state.json).toMatchObject({ message: 'Usuário criado' })
   })
 
-  it('Erro caso o usuário não informar nome', () => {
+  it('Erro caso o usuário não informar nome e/ou email', () => {
     const mockRequest = {
       body: {
-        email: 'marce@dio'
       }
     } as Request
     const mockResponse = makeMockResponse()
     userController.createUser(mockRequest, mockResponse)
     expect(mockResponse.state.status).toBe(400)
-    expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Name required' })
-  })
-
-  it('Erro caso o usuário não informar email', () => {
-    const mockRequest = {
-      body: {
-        name: 'Marce',
-      }
-    } as Request
-    const mockResponse = makeMockResponse()
-    userController.createUser(mockRequest, mockResponse)
-    expect(mockResponse.state.status).toBe(400)
-    expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Email required' })
+    expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Name and email required' })
   })
 
   it('Deve listar dos usuários', () => {
