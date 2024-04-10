@@ -8,8 +8,6 @@ import { Request } from  'express'
 describe('UserController', () => {
   const mockUserService: Partial<UserService> = {
     createUser: jest.fn(),
-    deleteUserByEmail: jest.fn(),
-    getAllUsers: jest.fn()
   }
   const userController = new UserController(mockUserService as UserService);
 
@@ -35,19 +33,6 @@ describe('UserController', () => {
     userController.createUser(mockRequest, mockResponse)
     expect(mockResponse.state.status).toBe(400)
     expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Name and email required' })
-  })
-
-  it('Deve listar dos usuários', () => {
-    const mockRequest = {
-      body: {
-        name: '',
-        email: 'marce@dio'
-      }
-    } as Request
-    const mockResponse = makeMockResponse()
-    userController.getAllUsers(mockRequest, mockResponse)
-    expect(mockResponse.state.status).toBe(200)
-    expect(Array.isArray(mockResponse.state.json)).toBe(true)
   })
 
 })
