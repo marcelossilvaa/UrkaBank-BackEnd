@@ -11,39 +11,24 @@ export class UserController {
     this.userService = userService
   }
 
-  createUser = (request: Request, reponse: Response) => {
-    const userService = new UserService()
+  createUser = (request: Request, response: Response): Response => {
     const user = request.body
 
-    if(!user.name || !user.email){
-      return reponse.status(400).json({message: 'Bad request! Name and email required'})
+    if(!user.name || !user.email || !user.password){
+      return response.status(400).json({message: 'Bad request! All fields are required!'})
     }
 
-    userService.createUser(user.name, user.email)
-    return reponse.status(201).json({ message: 'Usuário criado' })
+    this.userService.createUser(user.name, user.email, user.password)
+    return response.status(201).json({ message: 'Usuário criado' })
   }
-
-
-  deleteUser = (request: Request, response: Response) => {
-    const userEmailToDelete = request.body.email;
-
-    if (!userEmailToDelete) {
-      return response.status(400).json({ message: 'Bad request! Email required' });
-    }
-
-    const isDeleted = this.userService.deleteUserByEmail(userEmailToDelete);
-    if (isDeleted) {
-      return response.status(200).json({ message: 'Usuário deletado' });
-    } else {
-      return response.status(404).json({ message: 'Usuário não encontrado' });
-    }
-  };
   
-
-  getAllUsers = (request: Request, response: Response) => {
-    const userService = new UserService()
-
-    const users = userService.getAllUsers()
-    return response.status(200).json(users)
+  getUser = (request: Request, response: Response) => {
+    return response.status(200)
   }
+  
+  deleteUser = (request: Request, response: Response) => {
+    const user = request.body
+    console.log('Deletando usuário...', user)
+    return response.status(200).json({ message: 'Usuário deletado' })
+  };
 }
