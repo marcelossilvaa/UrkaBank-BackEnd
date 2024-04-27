@@ -19,4 +19,14 @@ export class UserService {
   getUser = () => {
 
   }
+
+  getAuthenticatedUSer = async (email: string, password: string): Promise <User | null> => {
+    return this.userRepository.getUserByEmailAndPasword(email, password)
+  }
+
+  getToken = async (email: string, password: string) => {
+    const user = await this.getAuthenticatedUSer(email, password)
+    
+    return user?.id_user
+  }
 }
