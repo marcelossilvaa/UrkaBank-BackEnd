@@ -22,6 +22,10 @@ export class UserService {
     return this.userRepository.getUser(userId)
   }
 
+  listUsers = async (): Promise<User[] | null> => {
+    return this.userRepository.listUsers()
+  }
+
   getAuthenticatedUSer = async (email: string, password: string): Promise <User | null> => {
     return this.userRepository.getUserByEmailAndPasword(email, password)
   }

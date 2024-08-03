@@ -22,6 +22,10 @@ export class UserRepository {
     })
   }
 
+  listUsers = async (): Promise<User[] | null> => {
+    return this.manager.find(User)
+  }
+
   getUserByEmailAndPasword = async(email: string, password: string): Promise< User | null > => {
     return this.manager.findOne(User, {
       where: {

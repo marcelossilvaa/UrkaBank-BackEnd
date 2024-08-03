@@ -8,6 +8,7 @@ const userController = new UserController()
 const loginController = new LoginController()
 
 router.post('/user', userController.createUser)
+router.get('/user', userController.listUsers)
 router.get('/user/:userId', userController.getUser)
 router.delete('/user', userController.deleteUser)
 

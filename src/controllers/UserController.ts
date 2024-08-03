@@ -31,6 +31,10 @@ export class UserController {
       email: user?.email
     })
   }
+  listUsers = async (request: Request, response: Response) => {
+    const users = await this.userService.listUsers()
+    return response.json(users)
+  }
   
   deleteUser = (request: Request, response: Response) => {
     const user = request.body
