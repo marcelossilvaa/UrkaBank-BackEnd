@@ -8,6 +8,7 @@
     "start": "node build/index.js",
     "dev": "ts-node-dev src/index.ts",
     "test": "jest",
+    "vercel-build": "npx prisma deploy",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:create": "npm run typeorm migration:create -n",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d src/database/index.ts",
