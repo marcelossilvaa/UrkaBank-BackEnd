@@ -7,9 +7,7 @@ export const AppDataSource = new DataSource({
   entities: [
     User
   ],
-  migrations: process.env.NODE_ENV === 'production'
-    ? ["dist/database/migrations/*.js"]
-    : ["src/database/migrations/*.ts"],
+  migrations: ["dist/database/migrations/*.js"]
 })
 
 AppDataSource.initialize()
