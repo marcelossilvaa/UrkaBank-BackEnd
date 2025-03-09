@@ -7,15 +7,15 @@ export const AppDataSource = new DataSource({
   entities: [
     User
   ],
-  migrations: [
-    "./src/database/migrations/*.ts"
-  ],
+  migrations: process.env.NODE_ENV === 'production'
+    ? ["dist/database/migrations/*.js"]
+    : ["src/database/migrations/*.ts"],
 })
 
 AppDataSource.initialize()
   .then(() => {
-      console.log("Data Source has been initialized!")
+    console.log("Data Source has been initialized!")
   })
   .catch((error) => {
-      console.error(error)
+    console.error(error)
   })
